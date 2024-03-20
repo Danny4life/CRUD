@@ -1,7 +1,9 @@
 package com.osiki.crudapi.controller;
 
-import com.osiki.crudapi.model.Employee;
+import com.osiki.crudapi.dto.EmployeeDto;
+import com.osiki.crudapi.entity.EmployeeEntity;
 import com.osiki.crudapi.services.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,28 +11,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
+@RequiredArgsConstructor
 public class EmployeeController {
 
 
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @PostMapping("/employees")
-    public Employee createEmployee(@RequestBody Employee employee){
+    public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto){
 
-        return employeeService.createEmployee(employee);
+        return employeeService.createEmployee(employeeDto);
 
     }
+
+//    @PostMapping("/employee/{departmentId}")
+//    public EmployeeEntity createEmployee(@RequestBody EmployeeEntity employee, @PathVariable Long departmentId){
+//
+//        return employeeService.createEmployee(employee, departmentId);
+//
+//    }
 
     @GetMapping("/employees")
 
-    public List<Employee> getAllEmployees(){
+    public List<EmployeeDto> getAllEmployees(){
 
         return employeeService.getAllEmployees();
 
@@ -47,19 +54,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
-        Employee employee = null;
-        employee = employeeService.getEmployeeById(id);
-        return ResponseEntity.ok(employee);
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long id){
+        EmployeeDto employeeDto = null;
+        employeeDto = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employeeDto);
     }
 
     @PutMapping("/employees/{id}")
 
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id,
-                                                   @RequestBody Employee employee){
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id,
+                                                      @RequestBody EmployeeDto employeeDto){
 
-        employee = employeeService.updateEmployee(id, employee);
-        return ResponseEntity.ok(employee);
+        employeeDto = employeeService.updateEmployee(id, employeeDto);
+        return ResponseEntity.ok(employeeDto);
 
     }
 

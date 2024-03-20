@@ -1,11 +1,15 @@
 package com.osiki.crudapi.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employees")
 public class EmployeeEntity {
 
@@ -15,4 +19,10 @@ public class EmployeeEntity {
     private String firstName;
     private String lastName;
     private String emailId;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private DepartmentEntity departmentEntity;
+
+
 }

@@ -1,17 +1,21 @@
 package com.osiki.crudapi.services;
 
-import com.osiki.crudapi.model.Employee;
+import com.osiki.crudapi.dto.EmployeeDto;
+import com.osiki.crudapi.entity.DepartmentEntity;
+import com.osiki.crudapi.entity.EmployeeEntity;
 
 import java.util.List;
 
 public interface EmployeeService {
-    Employee createEmployee(Employee employee);
+   EmployeeDto createEmployee(EmployeeDto employeeDto);
 
-    List<Employee> getAllEmployees();
+  //  EmployeeEntity createEmployee(EmployeeEntity employee, Long departmentId);
+
+    List<EmployeeDto> getAllEmployees();
 
     boolean deleteEmployee(Long id);
 
-    Employee getEmployeeById(Long id);
+    EmployeeDto getEmployeeById(Long id);
 
-    Employee updateEmployee(Long id, Employee employee);
+    EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto);
 }
