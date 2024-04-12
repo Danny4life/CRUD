@@ -4,6 +4,9 @@ import com.osiki.crudapi.dto.EmployeeDto;
 import com.osiki.crudapi.entity.EmployeeEntity;
 import com.osiki.crudapi.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/")
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "employees")
+@Slf4j
 public class EmployeeController {
 
 
@@ -54,9 +59,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
+    @Cacheable(key = "#id")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long id){
         EmployeeDto employeeDto = null;
         employeeDto = employeeService.getEmployeeById(id);
+
+        log.info("Getting student with id {} from DB ", id);
         return ResponseEntity.ok(employeeDto);
     }
 
