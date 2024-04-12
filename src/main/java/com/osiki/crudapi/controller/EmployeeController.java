@@ -6,6 +6,8 @@ import com.osiki.crudapi.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +51,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employees/{id}")
+    @CacheEvict(key = "#id")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
         boolean deleted = false;
         deleted = employeeService.deleteEmployee(id);
@@ -69,6 +72,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
+    @CachePut(key = "#id")
 
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable Long id,
                                                       @RequestBody EmployeeDto employeeDto){
