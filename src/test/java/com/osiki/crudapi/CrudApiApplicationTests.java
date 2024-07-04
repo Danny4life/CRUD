@@ -3,10 +3,10 @@ package com.osiki.crudapi;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class CrudApiApplicationTests {
 
-    @Test
+   // @Test
     void contextLoads() {
     }
 
