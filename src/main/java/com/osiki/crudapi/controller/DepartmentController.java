@@ -1,8 +1,10 @@
 package com.osiki.crudapi.controller;
 
+import com.osiki.crudapi.dto.DepartmentDto;
 import com.osiki.crudapi.entity.DepartmentEntity;
 import com.osiki.crudapi.services.DepartmentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,5 +26,21 @@ public class DepartmentController {
     public DepartmentEntity createDepartment(@RequestBody DepartmentEntity departmentEntity){
         return departmentService.saveDepartment(departmentEntity);
 
+    }
+
+    @PostMapping("/departments/{id}")
+    public ResponseEntity<String> joinDepartment(@PathVariable("id") Long id,
+                                         @RequestBody DepartmentDto dto){
+
+
+        return ResponseEntity.ok(departmentService.joinDept(id, dto));
+
+    }
+
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<DepartmentDto>> getDeptByEmployeeId(@PathVariable Long employeeId){
+        List<DepartmentDto> departmentDtos = departmentService.getDeptByEmployeeId(employeeId);
+
+        return ResponseEntity.ok(departmentDtos);
     }
 }

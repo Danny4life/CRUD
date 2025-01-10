@@ -35,13 +35,6 @@ public class EmployeeController {
 
     }
 
-//    @PostMapping("/employee/{departmentId}")
-//    public EmployeeEntity createEmployee(@RequestBody EmployeeEntity employee, @PathVariable Long departmentId){
-//
-//        return employeeService.createEmployee(employee, departmentId);
-//
-//    }
-
     @GetMapping("/employees")
 
     public List<EmployeeDto> getAllEmployees(){

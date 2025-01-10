@@ -1,5 +1,6 @@
 package com.osiki.crudapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "department_tbl")
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class DepartmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +23,9 @@ public class DepartmentEntity {
 
     private String departmentName;
 
-    @OneToMany(mappedBy = "departmentEntity", cascade = CascadeType.ALL)
-    private List<EmployeeEntity> employeeEntities;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    @JsonIgnore
+    private EmployeeEntity employee;
+
 }

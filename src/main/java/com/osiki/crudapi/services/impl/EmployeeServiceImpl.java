@@ -34,16 +34,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDto;
     }
 
-//    @Override
-//    public EmployeeEntity createEmployee(EmployeeEntity employee, Long departmentId) {
-//
-//        DepartmentEntity departmentEntity = departmentRepository.findById(departmentId)
-//                .orElseThrow(()-> new IllegalArgumentException("Department not found"));
-//
-//        employee.setDepartmentEntity(departmentEntity);
-//
-//        return employeeRepository.save(employee);
-//    }
 
     @Override
     public List<EmployeeDto> getAllEmployees() {

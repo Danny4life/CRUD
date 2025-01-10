@@ -9,4 +9,8 @@ public interface DepartmentService {
     List<DepartmentEntity> getAllDepartments();
 
     DepartmentEntity saveDepartment(DepartmentEntity departmentEntity);
+
+    String joinDept(Long id, DepartmentDto dto);
+
+    List<DepartmentDto> getDeptByEmployeeId(Long employeeId);
 }

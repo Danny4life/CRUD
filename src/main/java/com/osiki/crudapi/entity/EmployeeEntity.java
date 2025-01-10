@@ -3,6 +3,7 @@ package com.osiki.crudapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,9 +21,8 @@ public class EmployeeEntity {
     private String lastName;
     private String emailId;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private DepartmentEntity departmentEntity;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<DepartmentEntity> departmentEntity = new ArrayList<>();
 
 
 }
